@@ -1,59 +1,28 @@
-// src/users/users.controller.ts
-
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Param,
-  HttpStatus,
-  HttpException,
-} from '@nestjs/common';
+import { CreateUserDto } from './dto/create-user.dto';
+import { Controller, Post, UseGuards, Request, Body, Get } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { UsersService } from './users.service';
-import { User } from '../interfaces/user.interface';
-import { CreateUserDto } from './dtos/create-user.dto';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) { }
 
+  @UseGuards(AuthGuard('jwt'))
   @Get()
-  async findAll(): Promise<User[]> {
-    return this.usersService.findAll();
+  async findAll(@Request() req): Promise<any> {
+    // Assuming you want to fetch only the data related to the logged-in user
+    return this.usersService.findByUserId(req.user.userId);
   }
 
-  @Get(':id')
-  async findOne(@Param('id') id: string): Promise<User> {
-    const user = await this.usersService.findOne(id);
-    if (!user) {
-      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
-    }
-    return user;
-  }
-
+  @UseGuards(AuthGuard('jwt'))
   @Post()
-  async create(@Body() body: CreateUserDto): Promise<User> {
-    return this.usersService.create(body);
+  async create(
+    @Body() createUserDto: CreateUserDto,
+    @Request() req,
+  ): Promise<any> {
+    // Include the userId from the JWT in the creation process
+    return this.usersService.create(createUserDto, req.user.userId);
   }
 
-  // @Put(':id')
-  // async update(
-  //   @Param('id') id: string,
-  //   @Body() updateUserDto: any,
-  // ): Promise<User> {
-  //   const updatedUser = await this.usersService.update(id, updateUserDto);
-  //   if (!updatedUser) {
-  //     throw new HttpException('User not found', HttpStatus.NOT_FOUND);
-  //   }
-  //   return updatedUser;
-  // }
-
-  //   @Delete(':id')
-  //   async delete(@Param('id') id: string): Promise<User> {
-  //     const deletedUser = await this.usersService.delete(id);
-  //     if (!deletedUser) {
-  //       throw new HttpException('User not found', HttpStatus.NOT_FOUND);
-  //     }
-  //     return deletedUser;
-  //   }
+  // ... other methods, secured with @UseGuards(AuthGuard('jwt')) if necessary
 }

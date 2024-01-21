@@ -1,0 +1,9 @@
+### Create User 
+POST http://localhost:8080/categories
+content-type: application/json
+
+{
+    "username": "testUser1",
+    "password": "password",
+    "email": "test@gmail.com"
+}
