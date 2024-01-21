@@ -1,9 +1,8 @@
-import { Body, Injectable, Post, UseGuards } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Category } from '../schemas/category.schema';
 import { CreateCategoryDto } from './dto/create-category.dto';
-import { AuthGuard } from '@nestjs/passport';
 
 @Injectable()
 export class CategoriesService {
@@ -27,6 +26,4 @@ export class CategoriesService {
     newCategory.userId = userId;
     return newCategory.save();
   }
-
-  // ... other methods (update, delete, etc.)
 }

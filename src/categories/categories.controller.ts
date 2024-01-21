@@ -14,7 +14,7 @@ import { AuthGuard } from '@nestjs/passport';
 
 @Controller('categories')
 export class CategoriesController {
-  constructor(private readonly categoriesService: CategoriesService) { }
+  constructor(private readonly categoriesService: CategoriesService) {}
 
   @Get()
   async findAll(): Promise<Category[]> {
