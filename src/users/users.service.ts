@@ -18,10 +18,9 @@ export class UsersService {
     return this.userModel.findOne({ username }).exec();
   }
 
-  async create(createUserDto: CreateUserDto, userId: string): Promise<User> {
+  async create(createUserDto: CreateUserDto): Promise<User> {
     const newUser = new this.userModel({
       ...createUserDto,
-      userId, // Include the userId in the new user document
     });
     return newUser.save();
   }
