@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Category } from './category.schema';
 import { CreateCategoryDto } from './dto/create-category.dto';
+import { ObjectId } from 'mongodb';
 
 @Injectable()
 export class CategoriesService {
@@ -20,10 +21,13 @@ export class CategoriesService {
 
   async create(
     createCategoryDto: CreateCategoryDto,
-    userId: string,
+    userId: ObjectId,
   ): Promise<Category> {
-    const newCategory = new this.categoryModel(createCategoryDto);
-    newCategory.userId = userId;
+    console.log(userId, 'userId in service');
+    const newCategory = new this.categoryModel({
+      ...createCategoryDto,
+      userId: new ObjectId(userId),
+    });
     return newCategory.save();
   }
 }
