@@ -8,13 +8,13 @@ import {
   Request,
 } from '@nestjs/common';
 import { CategoriesService } from './categories.service';
-import { Category } from '../schemas/category.schema';
+import { Category } from './category.schema';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { AuthGuard } from '@nestjs/passport';
 
 @Controller('categories')
 export class CategoriesController {
-  constructor(private readonly categoriesService: CategoriesService) {}
+  constructor(private readonly categoriesService: CategoriesService) { }
 
   @Get()
   async findAll(): Promise<Category[]> {
