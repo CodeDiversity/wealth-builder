@@ -9,7 +9,7 @@ import { ObjectId } from 'mongodb';
 export class CategoriesService {
   constructor(
     @InjectModel('Category') private categoryModel: Model<Category>,
-  ) { }
+  ) {}
 
   async findAll(): Promise<Category[]> {
     return this.categoryModel.find().exec();
