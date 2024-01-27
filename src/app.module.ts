@@ -4,6 +4,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { CategoriesModule } from './categories/categories.module';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthModule } from './auth/auth.module';
+import { DebtsModule } from './debts/debts.module';
+import { AssetsModule } from './assets/assets.module';
 
 @Module({
   imports: [
@@ -15,6 +17,8 @@ import { AuthModule } from './auth/auth.module';
       secret: 'secret',
       signOptions: { expiresIn: '1d' },
     }),
+    DebtsModule,
+    AssetsModule,
     // other modules
   ],
 })
