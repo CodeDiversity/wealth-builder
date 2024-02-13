@@ -1,17 +1,24 @@
 // src/auth/auth.controller.ts
 
-import { Controller, Request, Post, UseGuards } from '@nestjs/common';
+import { Controller, Post, Body, BadRequestException } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { LocalAuthGuard } from './local-auth.guard'; // You'll need to implement LocalAuthGuard
+import { LoginDto } from './dto/login.dto';
 
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  @UseGuards(LocalAuthGuard)
   @Post('login')
-  async login(@Request() req) {
-    console.log(req);
-    return this.authService.login(req.user);
+  async login(@Body() body: LoginDto) {
+    const user = await this.authService.validateUser(
+      body.username,
+      body.password,
+    );
+
+    if (!user) {
+      throw new BadRequestException('Invalid username or password');
+    } else {
+      return this.authService.login(user);
+    }
   }
 }

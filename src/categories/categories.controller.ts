@@ -37,6 +37,4 @@ export class CategoriesController {
     const userId = req.user.userId; // Make sure 'userId' corresponds to the property in the JWT payload
     return this.categoriesService.create(createCategoryDto, userId);
   }
-
-  // ... other routes (PUT, DELETE, etc.)
 }

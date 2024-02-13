@@ -15,7 +15,7 @@ export class UsersService {
     return this.userModel.find({ userId }).exec();
   }
 
-  async findOneByUserId(username: string): Promise<User | null> {
+  async findOneByUserName(username: string): Promise<User | null> {
     console.log(username, 'username from findOneByUserId');
     username = username.toLowerCase();
     return this.userModel.findOne({ username }).exec();
@@ -25,9 +25,9 @@ export class UsersService {
     const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
     const userToLower = createUserDto.username.toLowerCase();
     const newUser = new this.userModel({
+      ...createUserDto,
       username: userToLower,
       password: hashedPassword,
-      ...createUserDto,
     });
     return newUser.save();
   }
