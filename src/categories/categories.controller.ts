@@ -32,7 +32,6 @@ export class CategoriesController {
     @Body() createCategoryDto: CreateCategoryDto,
     @Request() req,
   ): Promise<Category> {
-    console.log(req.user, 'user from create category');
     // Extract user ID from the request object
     const userId = req.user.userId; // Make sure 'userId' corresponds to the property in the JWT payload
     return this.categoriesService.create(createCategoryDto, userId);

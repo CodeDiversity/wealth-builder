@@ -5,6 +5,7 @@ export const CategorySchema = new mongoose.Schema({
   userId: { type: mongoose.Types.ObjectId, ref: 'User', required: true },
   name: { type: String, required: true },
   budgetLimit: { type: Number, required: true },
+  description: { type: String, required: false },
   // ... any other fields you need
 });
 
