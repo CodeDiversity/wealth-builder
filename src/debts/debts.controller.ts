@@ -1,12 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Param,
-  UseGuards,
-  Request,
-} from '@nestjs/common';
+import { Controller, Post, Body, UseGuards, Request } from '@nestjs/common';
 import { DebtsService } from './debts.service';
 import { CreateDebtDto } from './dto/create-debt.dto';
 import { AuthGuard } from '@nestjs/passport';
@@ -22,6 +14,7 @@ export class DebtsController {
     @Body() createDebtDto: CreateDebtDto,
     @Request() req,
   ): Promise<Debt> {
+    console.log(req.user);
     return this.debtsService.create(createDebtDto, req.user.userId);
   }
 

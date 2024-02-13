@@ -1,3 +1,4 @@
+import { Type } from 'class-transformer';
 import {
   IsNotEmpty,
   IsNumber,
@@ -21,6 +22,7 @@ export class CreateDebtDto {
 
   @IsOptional()
   @IsDate()
+  @Type(() => Date)
   readonly dueDate?: Date;
 
   @IsOptional()
@@ -29,6 +31,7 @@ export class CreateDebtDto {
 
   @IsOptional()
   @IsDate()
+  @Type(() => Date)
   readonly paymentDate?: Date;
 
   @IsOptional()
