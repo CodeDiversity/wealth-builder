@@ -15,7 +15,7 @@ export class AuthService {
     const user = await this.usersService.findOneByUserName(username);
     if (user && bcrypt.compareSync(pass, user.password)) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { password, ...result } = user;
+      const { password, ...result } = user.toObject();
       return result;
     }
     return null;
@@ -23,7 +23,7 @@ export class AuthService {
 
   async login(user: any) {
     console.log('user from login', user);
-    const payload = { username: user._doc.username, userId: user._doc._id };
+    const payload = { username: user.username, sub: user._id.toString() };
     console.log(payload, 'payload from login');
     return {
       access_token: this.jwtService.sign(payload),
