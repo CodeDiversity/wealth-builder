@@ -1,11 +1,11 @@
-### Create User 
+### Create Category
 POST http://localhost:8080/categories
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3R1c2VyMyIsInN1YiI6IjY1Y2FkNjlmZTliZTYzMTE0YzE4MDk3OCIsImlhdCI6MTcwNzc5NDMyMCwiZXhwIjoxNzA3ODgwNzIwfQ.fteXKH5grfvUkSUNnfZUu3x2czy0JQwtcXfoao9cwvY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3R1c2VyMyIsInVzZXJJZCI6IjY1Y2FkNjlmZTliZTYzMTE0YzE4MDk3OCIsImlhdCI6MTcwNzc5NTQxNCwiZXhwIjoxNzA3ODgxODE0fQ.MwtKtuinBrS34WkfPHdepR9qgRFo44nFHb4jpD6dK4s
 
 {
-    "name": "food",
-    "budgetLimit": 3000
+    "name": "utilities",
+    "budgetLimit": 500
 }
 
 # export class CreateCategoryDto {
